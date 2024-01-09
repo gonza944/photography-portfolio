@@ -12,6 +12,7 @@ const config: Config = {
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['var(--font-inter)', 'serif'],
+      'serif-medium': ['var(--font-inter-medium)', 'serif'],
     },
     extend: {
       backgroundImage: {
