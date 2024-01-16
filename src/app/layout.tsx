@@ -26,9 +26,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${interMedium.variable} font-serif ml-20 mr-20`}>
+      <body className={`${inter.variable} ${interMedium.variable} font-serif ml-20 mr-20 flex flex-col h-[100vh]`}>
         <Navbar />
-        {children}
+        <main className="flex-grow flex flex-col justify-center">{children}</main>
       </body>
     </html>
   );
