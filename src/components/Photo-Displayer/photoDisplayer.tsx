@@ -17,6 +17,7 @@ const Displayer: React.FC<{ imageUrl: StaticImageData[] }> = ({ imageUrl }) => {
 
   return (
     <Image
+      className=" rounded-md shadow-md shadow-fontColor"
       src={imageUrl[currentImageIndex]}
       alt="Main image"
       style={{ width: "600px", height: "auto" }}
