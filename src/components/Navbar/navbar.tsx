@@ -1,8 +1,8 @@
 "use client";
 
 import HomeIcon from "@/app/assets/home-icon";
-import StyledLinks from "../StyledLink/styledLinks";
-import StyledButton from "../StyledButton/styledButton";
+import StyledLinks from "../Styled-Link/styledLinks";
+import StyledButton from "../Styled-Button/styledButton";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between mt-4 max-w-[60%]">
+    <div className="flex justify-between mt-4 max-w-[60%] mb-4">
       <StyledLinks href="/">{<HomeIcon />}</StyledLinks>
       <div className="flex flex-row gap-80">
         <StyledLinks href="/stories">Stories</StyledLinks>
