@@ -1,9 +1,9 @@
 "use client";
 
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const Displayer: React.FC<{ imageUrl: StaticImageData[] }> = ({ imageUrl }) => {
+const Displayer: React.FC<{ imageUrl: string[] }> = ({ imageUrl }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -20,7 +20,9 @@ const Displayer: React.FC<{ imageUrl: StaticImageData[] }> = ({ imageUrl }) => {
       className=" rounded-md shadow-md shadow-fontColor"
       src={imageUrl[currentImageIndex]}
       alt="Main image"
-      style={{ width: "600px", height: "auto" }}
+      width={700}
+      height={800}
+      style={{ width: "auto", height: "800" }}
     />
   );
 };
