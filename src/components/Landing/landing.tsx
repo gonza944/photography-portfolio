@@ -1,12 +1,14 @@
+import { list } from "@vercel/blob";
 import Displayer from "../Photo-Displayer/photoDisplayer";
-import image from "../../public/images/DJI_0348-HDR-Enhanced-SR.jpg";
-import image2 from "../../public/images/GON_3324.jpg";
-import image3 from "../../public/images/DJI_0408-HDR-Enhanced-SR.jpg";
 
 const Landing = async () => {
+  const Urls = await list({ limit: 10, prefix: "Portfolio/" }).then((res) =>
+    res.blobs.map((blob) => blob.url)
+  );
+
   return (
     <div className="font-serif flex align-middle justify-center pt-{50%}">
-      <Displayer imageUrl={[image, image2, image3]} />
+      <Displayer imageUrl={Urls} />
     </div>
   );
 };
