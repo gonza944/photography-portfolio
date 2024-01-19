@@ -15,7 +15,7 @@ const Navbar = () => {
   const isIddle = useStaleHook(4000);
 
   return (
-    <div className="flex justify-between mt-4 max-w-[60%] mb-4">
+    <div className="flex justify-between mt-4 max-w-[60%] mb-12">
       <StyledLinks href="/">{<HomeIcon />}</StyledLinks>
       <div className="flex flex-row gap-80">
         <StyledLinks isIddle={isIddle} href="/stories">
