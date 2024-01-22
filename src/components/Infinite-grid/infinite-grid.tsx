@@ -6,7 +6,9 @@ import { Random } from "unsplash-js/dist/methods/photos/types";
 import { getNewPhotosRequest } from "../../app/actions";
 
 const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
-  const ninentyPercentile = Number.parseInt((elements.length * 0.9).toFixed(0));
+  const percentileToFetchNewData = Number.parseInt(
+    (elements.length * 0.8).toFixed(0)
+  );
   const [shouldFetchMorePhotos, setShouldFetchMorePhotos] = useState(false);
   const [photos, setPhotos] = useState(elements);
   const triggerPhoto = useRef(null);
@@ -34,9 +36,9 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
     if (shouldFetchMorePhotos) {
       setShouldFetchMorePhotos(false);
       const fetchNewPhotos = async () => {
-        const { response: newPhotos } = await getNewPhotosRequest();
+        const newPhotos = await getNewPhotosRequest(30);
 
-        setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos || []]);
+        setPhotos((prevPhotos) => [...prevPhotos, ...(newPhotos || [])]);
       };
 
       fetchNewPhotos();
@@ -48,8 +50,9 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
       {photos.map((element, index) => (
         <div key={index}>
           <Image
+            className=" rounded-md shadow-md shadow-fontColor"
             ref={
-              index === elements.length - ninentyPercentile
+              index === elements.length - percentileToFetchNewData
                 ? triggerPhoto
                 : null
             }
