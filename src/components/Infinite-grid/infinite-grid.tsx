@@ -5,46 +5,36 @@ import { env } from "process";
 import { useEffect, useRef, useState } from "react";
 import { Random } from "unsplash-js/dist/methods/photos/types";
 import { getNewPhotosRequest } from "../../app/actions";
+import useIntersectionObserver from "@/Hooks/useIntersectionObserver";
 
 const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
   const percentileToFetchNewData = Number.parseInt(
-    (elements.length * 0.8).toFixed(0)
+    (
+      elements.length * Number.parseInt(env.PERCENTAGE_TO_FETCH_NEW_DATA || "0.8")
+    ).toFixed(0)
   );
-  const [shouldFetchMorePhotos, setShouldFetchMorePhotos] = useState(false);
-  const [photos, setPhotos] = useState(elements);
-  const triggerPhoto = useRef(null);
-
-  const handleObserver = (entities: any) => {
-    const target = entities[0];
-    if (target.isIntersecting) {
-      setShouldFetchMorePhotos(true);
-    }
-  };
-
-  useEffect(() => {
-    const options = {
+  const [isIntersecting, targetRef] = useIntersectionObserver<HTMLImageElement>(
+    {
       root: null,
       rootMargin: "0px",
       threshold: 0.3,
-    };
-    const observer = new IntersectionObserver(handleObserver, options);
-    if (triggerPhoto.current) {
-      observer.observe(triggerPhoto.current);
     }
-  }, []);
+  );
+  const [photos, setPhotos] = useState(elements);
 
   useEffect(() => {
-    if (shouldFetchMorePhotos) {
-      setShouldFetchMorePhotos(false);
+    if (isIntersecting) {
       const fetchNewPhotos = async () => {
-        const newPhotos = await getNewPhotosRequest(env.STORY_FETCH_PHOTO_NUMBER);
+        const newPhotos = await getNewPhotosRequest(
+          env.STORY_FETCH_PHOTO_NUMBER
+        );
 
         setPhotos((prevPhotos) => [...prevPhotos, ...(newPhotos || [])]);
       };
 
       fetchNewPhotos();
     }
-  }, [shouldFetchMorePhotos]);
+  }, [isIntersecting]);
 
   return (
     <div className="grid grid-flow-row grid-cols-3 gap-8">
@@ -54,7 +44,7 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
             className=" rounded-md shadow-md shadow-fontColor"
             ref={
               index === elements.length - percentileToFetchNewData
-                ? triggerPhoto
+                ? targetRef
                 : null
             }
             src={element.urls.regular}
