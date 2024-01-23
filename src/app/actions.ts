@@ -7,7 +7,7 @@ export const getNewPhotosRequest = cache(
   async (numberOfPhotos: string = '30') => {
     try {
       const unsplashClient = createApi({
-        accessKey: env.UNSPLASH_API_KEY || "",
+        accessKey: "ZgRP4uDjKn-YfrDVDKjqWC8tRCaX423xdrus2t2jE1Q",
       });
 
       const data = await unsplashClient.photos.getRandom({

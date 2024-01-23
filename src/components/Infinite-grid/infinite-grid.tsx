@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { env } from "process";
 import { useEffect, useRef, useState } from "react";
 import { Random } from "unsplash-js/dist/methods/photos/types";
 import { getNewPhotosRequest } from "../../app/actions";
@@ -36,7 +37,7 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
     if (shouldFetchMorePhotos) {
       setShouldFetchMorePhotos(false);
       const fetchNewPhotos = async () => {
-        const newPhotos = await getNewPhotosRequest(30);
+        const newPhotos = await getNewPhotosRequest(env.STORY_FETCH_PHOTO_NUMBER);
 
         setPhotos((prevPhotos) => [...prevPhotos, ...(newPhotos || [])]);
       };
