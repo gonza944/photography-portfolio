@@ -10,7 +10,7 @@ import useIntersectionObserver from "@/Hooks/useIntersectionObserver";
 const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
   const percentileToFetchNewData = Number.parseInt(
     (
-      elements.length * Number.parseInt(env.PERCENTAGE_TO_FETCH_NEW_DATA || "0.8")
+      elements.length * Number.parseFloat(env.PERCENTAGE_TO_FETCH_NEW_DATA || "0.8")
     ).toFixed(0)
   );
   const [isIntersecting, targetRef] = useIntersectionObserver<HTMLImageElement>(
