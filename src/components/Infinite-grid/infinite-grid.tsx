@@ -37,7 +37,7 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
   }, [isIntersecting]);
 
   return (
-    <div className="grid grid-flow-row grid-cols-3 gap-8">
+    <div className="grid grid-flow-row grid-cols-3 gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1">
       {photos.map((element, index) => (
         <div key={index}>
           <Image

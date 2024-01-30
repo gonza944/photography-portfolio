@@ -11,8 +11,6 @@ const Navbar: React.FC = () => {
     setShowAboutSection(shouldShow);
   };
 
-  const isMobile = window.matchMedia("(max-width: 640px)");
-
   const isIddle = useStaleHook(4000);
 
   return (
