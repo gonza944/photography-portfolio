@@ -26,8 +26,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${interMedium.variable} font-serif ml-20 mr-20 flex flex-col h-[100vh] bg-[url(https://grainy-gradients.vercel.app/noise.svg)] bg-backgroundColor`}>
-        <Navbar />
+      <body className={`${inter.variable} ${interMedium.variable} font-serif ml-20 mr-20 flex flex-col h-[100vh] bg-[url(https://grainy-gradients.vercel.app/noise.svg)] bg-backgroundColor max-sm:m-0`}>
+        <Navbar/>
         <main className="flex-grow flex flex-col justify-center">{children}</main>
       </body>
     </html>
