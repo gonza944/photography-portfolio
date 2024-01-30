@@ -41,7 +41,7 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
       {photos.map((element, index) => (
         <div key={index}>
           <Image
-            className=" rounded-md shadow-md shadow-fontColor"
+            className=" rounded-md shadow-md shadow-fontColor max-sm:rounded-none"
             ref={
               index === elements.length - percentileToFetchNewData
                 ? targetRef

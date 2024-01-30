@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
   const isIddle = useStaleHook(4000);
 
   return (
-    <div className="flex flex-col pt-10 pb-10 max-sm:pl-8 max-sm:pr-8">
+    <div className="flex flex-col pt-10 pb-10 max-sm:pl-8 max-sm:pr-8 sticky">
       <div className="flex justify-between items-center max-w-[66%] max-sm:max-w-[100%] max-sm:justify-center max-sm:gap-[33%] ">
         <StyledLinks href="/">
           <p className="font-serif-medium text-xl">GA</p>
