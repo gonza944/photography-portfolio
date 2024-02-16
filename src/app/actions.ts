@@ -20,3 +20,20 @@ export const getNewPhotosRequest = cache(
     }
   }
 );
+
+
+export const getPhotoById = cache(
+  async (id: string) => {
+    try {
+      const unsplashClient = createApi({
+        accessKey: "ZgRP4uDjKn-YfrDVDKjqWC8tRCaX423xdrus2t2jE1Q",
+      });
+
+      const data = await unsplashClient.photos.get({ photoId: id });
+
+      return data.response as Random;
+    } catch (error) {
+      throw new Error("failed to fetch new photos");
+    }
+  }
+);
