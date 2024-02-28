@@ -25,7 +25,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
       ref={dialogRef}
       onClick={closeModal}
       onClose={router.back}
-      className="rounded-md backdrop:backdrop-blur-sm text-3x overflow-hidden">
+      className="rounded-md backdrop:backdrop-blur-sm backdrop:backdrop-grayscale text-3x overflow-hidden">
       <div>{children}</div>
     </dialog>
   );
