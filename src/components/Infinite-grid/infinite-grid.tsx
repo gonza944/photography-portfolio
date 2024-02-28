@@ -1,12 +1,12 @@
 "use client";
 
+import useIntersectionObserver from "@/Hooks/useIntersectionObserver";
 import Image from "next/image";
+import Link from "next/link";
 import { env } from "process";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Random } from "unsplash-js/dist/methods/photos/types";
 import { getNewPhotosRequest } from "../../app/actions";
-import useIntersectionObserver from "@/Hooks/useIntersectionObserver";
-import Link from "next/link";
 
 const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
   const percentileToFetchNewData = Number.parseInt(

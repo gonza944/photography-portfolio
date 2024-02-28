@@ -10,6 +10,11 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     dialogRef.current?.showModal();
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, []);
 
   const closeModal = (e: React.MouseEvent<HTMLDialogElement, MouseEvent>) =>
@@ -20,7 +25,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
       ref={dialogRef}
       onClick={closeModal}
       onClose={router.back}
-      className="rounded-md backdrop:bg-black/60 backdrop:backdrop-blur-sm text-3xl">
+      className="rounded-md backdrop:backdrop-blur-sm text-3x overflow-hidden">
       <div>{children}</div>
     </dialog>
   );

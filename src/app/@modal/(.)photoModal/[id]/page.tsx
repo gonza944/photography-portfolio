@@ -3,7 +3,6 @@ import { Modal } from "@/components/Modal/modal";
 import Image from "next/image";
 
 const PhotoModal: React.FC<{ params: { id: string } }> = async ({ params }) => {
-  console.log(params);
   const photo = await getPhotoById(params.id);
 
   return (
