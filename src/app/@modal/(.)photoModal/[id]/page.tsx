@@ -1,6 +1,7 @@
 import { getPhotoById } from "@/app/actions";
 import { Modal } from "@/components/Modal/modal";
 import Image from "next/image";
+import { Suspense } from "react";
 
 const PhotoModal: React.FC<{ params: { id: string } }> = async ({ params }) => {
   const photo = await getPhotoById(params.id);
@@ -8,7 +9,7 @@ const PhotoModal: React.FC<{ params: { id: string } }> = async ({ params }) => {
   return (
     <Modal>
       {photo && (
-        <Image
+          <Image
           className=" rounded-md shadow-md shadow-fontColor"
           src={photo.urls.regular}
           width={photo.width}
