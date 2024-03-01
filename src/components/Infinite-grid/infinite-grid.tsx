@@ -42,9 +42,9 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
     <div className="grid grid-flow-row grid-cols-3 gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1">
       {photos.map((element, index) => (
         <div key={index}  className="relative">
-          <Link href={`/photoModal/${element.id}`}  className="relative">
+          <Link href={`/photoModal/${element.id}`}  className="relative max-sm:flex max-sm:flex-col max-sm:shadow-md">
             <Image
-              className="relative z-20 rounded-md shadow-md shadow-fontColor max-sm:rounded-none max-sm:filter-none hover:z-0"
+              className="relative z-20 rounded-md md:shadow-md shadow-fontColor max-sm:rounded-none max-sm:filter-none hover:z-0"
               ref={
                 index === elements.length - percentileToFetchNewData
                   ? targetRef
@@ -57,7 +57,7 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
               style={{ width: "auto", height: "auto" }}
             />
             {element.description && (
-              <div className="absolute z-10 hover:z-30 rounded-md max-sm:rounded-none bg-gradient-to-t from-stone-300 to-transparent w-[100%] h-[100%] bottom-0 p-4 pt-32 pb-8 flex items-end justify-center">
+              <div className="absolute z-10 hover:z-30 rounded-md max-sm:rounded-none md:bg-gradient-to-t md:from-stone-300 md:to-transparent w-[100%] h-[100%] bottom-0 p-4 pt-32 pb-8 flex items-end justify-center max-sm:relative max-sm:h-fit max-sm:p-8 max-sm:justify-start max-sm:bg-stone-100">
                 <p>{element.description}</p>
               </div>
             )}
