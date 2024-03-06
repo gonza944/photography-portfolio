@@ -18,7 +18,7 @@ const Displayer: React.FC<{ photos: Random[] }> = ({ photos }) => {
 
   return (
     <Image
-      className=" rounded-md shadow-md shadow-fontColor"
+      className=" rounded-md shadow-md shadow-fontColor self-center"
       src={photos[currentImageIndex].urls.regular}
       width={photos[currentImageIndex].width}
       height={photos[currentImageIndex].height}
