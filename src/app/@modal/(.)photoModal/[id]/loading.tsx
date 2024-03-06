@@ -1,7 +1,6 @@
 import { Modal } from "@/components/Modal/modal";
 
 const Loading = () => {
-  // You can add any UI inside Loading, including a Skeleton.
   return (
     <Modal>
       <div className="flex space-x-2 justify-center items-center bg-stone-800 p-60 rounded-md">
