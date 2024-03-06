@@ -5,7 +5,7 @@ import { useState } from "react";
 import StyledButton from "../Styled-Button/styledButton";
 import StyledLinks from "../Styled-Link/styledLinks";
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<{className?:string}> = () => {
   const [showAboutSection, setShowAboutSection] = useState(false);
   const handleAboutHover = (shouldShow: boolean) => {
     setShowAboutSection(shouldShow);
@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
   const isIddle = useStaleHook(4000);
 
   return (
-    <div className="flex flex-col pt-10 pb-10 max-sm:pl-8 max-sm:pr-8 sticky">
+    <div className="flex flex-col pt-10 pb-10 max-sm:pl-8 max-sm:pr-8 sticky top-0 z-30 bg-[url(https://grainy-gradients.vercel.app/noise.svg)] bg-backgroundColor">
       <div className="flex justify-between items-center max-w-[66%] max-sm:max-w-[100%] max-sm:justify-center max-sm:gap-[33%] ">
         <StyledLinks href="/">
           <p className="font-serif-medium text-xl">GA</p>
