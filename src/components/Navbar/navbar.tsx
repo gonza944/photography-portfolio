@@ -14,7 +14,7 @@ const Navbar: React.FC<{className?:string}> = () => {
   const isIddle = useStaleHook(4000);
 
   return (
-    <div className="flex flex-col pt-10 pb-10 max-sm:pl-8 max-sm:pr-8 sticky top-0 z-30 bg-[url(https://grainy-gradients.vercel.app/noise.svg)] bg-backgroundColor">
+    <div className="flex flex-col pt-10 pb-10 px-20 max-sm:px-8 sticky top-0 z-30 bg-[url(https://grainy-gradients.vercel.app/noise.svg)] bg-backgroundColor">
       <div className="flex justify-between items-center max-w-[66%] max-sm:max-w-[100%] max-sm:justify-center max-sm:gap-[33%] ">
         <StyledLinks href="/">
           <p className="font-serif-medium text-xl">GA</p>

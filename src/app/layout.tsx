@@ -1,7 +1,7 @@
+import Navbar from "@/components/Navbar/navbar";
 import type { Metadata } from "next";
 import LocalFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/Navbar/navbar";
 
 const inter = LocalFont({
   src: "../public/Monospace-medium.ttf",
@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${interMedium.variable} font-serif ml-20 mr-20 flex flex-col h-[100vh] bg-[url(https://grainy-gradients.vercel.app/noise.svg)] bg-backgroundColor max-sm:m-0 max-sm:ml-[3px] `}>
         <Navbar/>
-        <main className="flex-grow flex flex-col justify-center">{children}</main>
+        <main className="flex-grow flex flex-col justify-center mx-20 max-sm:m-0">{children}</main>
         <div>{modal}</div>
       </body>
     </html>
