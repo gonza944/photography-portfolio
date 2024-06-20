@@ -5,7 +5,11 @@ import { shimmer, toBase64 } from "@/utils/loaderUtils";
 import Image from "next/image";
 import { use } from "react";
 
-const PhotoModal: React.FC<{ params: { id: string } }> = ({ params }) => {
+export type PhotoProps = {
+  params: { id: string }
+}
+
+const PhotoModal: React.FC<PhotoProps> = ({ params }) => {
   const {response: photo} = use(getPhotoById(params.id));
 
   return (

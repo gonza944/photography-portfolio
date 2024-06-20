@@ -4,6 +4,7 @@ import useStaleHook from "@/Hooks/useStaleHook";
 import { useState } from "react";
 import StyledButton from "../Styled-Button/styledButton";
 import StyledLinks from "../Styled-Link/styledLinks";
+import { description } from "@/utils/copy";
 
 const Navbar: React.FC<{className?:string}> = () => {
   const [showAboutSection, setShowAboutSection] = useState(false);
@@ -33,8 +34,7 @@ const Navbar: React.FC<{className?:string}> = () => {
       {(showAboutSection) && (
         <div className="flex max-w-[37%] self-end max-sm:max-w-[100%] max-sm:self-start max-sm:mt-12">
           <p>
-            {`I'm a software engineer and photographer based in Argentina,
-            passionate about capturing emotions through thhe lens of a camera.`}
+            {description}
             <StyledLinks
               className=" text-primaryColor text-sm pr-2"
               href="www.instagram.com">
