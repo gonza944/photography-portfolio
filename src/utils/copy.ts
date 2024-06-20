@@ -1,0 +1,1 @@
+export const description = `I'm a software engineer and photographer based in Argentina, passionate about capturing emotions through thhe lens of a camera.`
