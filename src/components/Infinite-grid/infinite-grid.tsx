@@ -60,7 +60,7 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
             />
             {element.description && (
               <div className="absolute z-10 hover:z-30 rounded-md max-sm:rounded-none md:bg-gradient-to-t md:from-stone-300 md:to-transparent w-[100%] h-[100%] bottom-0 p-4 pt-32 pb-8 flex items-end justify-center max-sm:relative max-sm:h-fit max-sm:p-8 max-sm:justify-start max-sm:bg-stone-100">
-                <p className=" max-w-max text-ellipsis overflow-hidden">{element.description}</p>
+                <p>{element.description}</p>
               </div>
             )}
           </Link>
