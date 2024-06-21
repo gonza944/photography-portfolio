@@ -7,6 +7,7 @@ import Link from "next/link";
 import { env } from "process";
 import { useEffect, useState } from "react";
 import { Photo, getNewPhotosRequest } from "../../app/actions";
+import ScrollToTop from "../Scroll-to-top/scroll-to-top";
 
 const InfiniteGrid: React.FC<{ elements: Photo[] }> = ({ elements }) => {
   const percentileToFetchNewData = Number.parseInt(
@@ -72,6 +73,7 @@ const InfiniteGrid: React.FC<{ elements: Photo[] }> = ({ elements }) => {
           </Link>
         </div>
       ))}
+      <ScrollToTop/>
     </div>
   );
 };
