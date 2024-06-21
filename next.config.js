@@ -14,6 +14,12 @@ const nextConfig = {
             port: '',
             pathname: '**',
           },
+          {
+            protocol: 'https',
+            hostname: 'gonzaloariza-975314016.imgix.net',
+            port: '',
+            pathname: '**',
+          },
         ],
       },
 }

@@ -6,10 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { env } from "process";
 import { useEffect, useState } from "react";
-import { Random } from "unsplash-js/dist/methods/photos/types";
-import { getNewPhotosRequest } from "../../app/actions";
+import { Photo, getNewPhotosRequest } from "../../app/actions";
 
-const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
+const InfiniteGrid: React.FC<{ elements: Photo[] }> = ({ elements }) => {
   const percentileToFetchNewData = Number.parseInt(
     (
       elements.length *
@@ -29,7 +28,8 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
     if (isIntersecting) {
       const fetchNewPhotos = async () => {
         const newPhotos = await getNewPhotosRequest(
-          env.STORY_FETCH_PHOTO_NUMBER
+          env.STORY_FETCH_PHOTO_NUMBER,
+          elements.length + 1
         );
 
         setPhotos((prevPhotos) => [...prevPhotos, ...(newPhotos || [])]);
@@ -37,13 +37,15 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
 
       fetchNewPhotos();
     }
-  }, [isIntersecting]);
+  }, [elements.length, isIntersecting]);
 
   return (
     <div className="grid grid-flow-row grid-cols-3 gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1">
       {photos.map((element, index) => (
-        <div key={index}  className="relative">
-          <Link href={`/photoModal/${element.id}`}  className="relative max-sm:flex max-sm:flex-col max-sm:shadow-md">
+        <div key={index} className="relative">
+          <Link
+            href={`/photoModal/${element.id}`}
+            className="relative max-sm:flex max-sm:flex-col max-sm:shadow-md">
             <Image
               className="relative z-20 rounded-md md:shadow-md shadow-fontColor max-sm:rounded-none max-sm:filter-none hover:z-0"
               ref={
@@ -51,16 +53,20 @@ const InfiniteGrid: React.FC<{ elements: Random[] }> = ({ elements }) => {
                   ? targetRef
                   : null
               }
-              src={element.urls.regular}
+              src={element.src}
               width={element.width}
               height={element.height}
-              alt={element.alt_description || "Image"}
+              alt={element.alt || "Image"}
               style={{ width: "auto", height: "auto" }}
-              placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(element.width, element.height))}`}
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(element.width, element.height)
+              )}`}
             />
             {element.description && (
               <div className="absolute z-10 hover:z-30 rounded-md max-sm:rounded-none md:bg-gradient-to-t md:from-stone-300 md:to-transparent w-[100%] h-[100%] bottom-0 p-4 pt-32 pb-8 flex items-end justify-center max-sm:relative max-sm:h-fit max-sm:p-8 max-sm:justify-start max-sm:bg-stone-100">
-                <p className=" max-w-max text-ellipsis overflow-hidden ">{element.description}</p>
+                <p className=" max-w-max text-ellipsis overflow-hidden ">
+                  {element.description}
+                </p>
               </div>
             )}
           </Link>
