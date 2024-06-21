@@ -15,7 +15,7 @@ export type Photo = {
 export const getNewPhotosRequest = cache(
   async (numberOfPhotos: string = "30", startFrom: number = 1) => {
     try {
-      if (env.VERCEL_ENV === "developments") {
+      if (env.VERCEL_ENV === "development") {
         const unsplashClient = createApi({
           accessKey: `${env.UNSPLASH_API_KEY}`,
         });
@@ -79,7 +79,7 @@ export const getNewPhotosRequest = cache(
 
 export const getPhotoById = cache(async (id: string) => {
   try {
-    if (env.VERCEL_ENV === "developments") {
+    if (env.VERCEL_ENV === "development") {
       const unsplashClient = createApi({
         accessKey: `${env.UNSPLASH_API_KEY}`,
       });
