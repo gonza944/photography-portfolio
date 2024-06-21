@@ -4,7 +4,7 @@ import { env } from "process";
 
 const Landing = async () => {
 
-  const photos = await getNewPhotosRequest(env.LANDING_FETCH_PHOTO_NUMBER);
+  const photos = await getNewPhotosRequest(env.NEXT_PUBLIC_LANDING_FETCH_PHOTO_NUMBER);
 
   return (
     <div className="font-serif flex align-middle justify-center pt-{50%}">

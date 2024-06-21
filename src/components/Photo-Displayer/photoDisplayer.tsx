@@ -1,10 +1,10 @@
 "use client";
 
+import { Photo } from "@/app/actions";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Random } from "unsplash-js/dist/methods/photos/types";
 
-const Displayer: React.FC<{ photos: Random[] }> = ({ photos }) => {
+const Displayer: React.FC<{ photos: Photo[] }> = ({ photos }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -19,10 +19,10 @@ const Displayer: React.FC<{ photos: Random[] }> = ({ photos }) => {
   return (
     <Image
       className=" rounded-md shadow-md shadow-fontColor self-center"
-      src={photos[currentImageIndex].urls.regular}
+      src={photos[currentImageIndex].src}
       width={photos[currentImageIndex].width}
       height={photos[currentImageIndex].height}
-      alt={photos[currentImageIndex].alt_description || "Image"}
+      alt={photos[currentImageIndex].alt || "Image"}
       style={{ width: "600px", height: "auto" }}
     />
   );
