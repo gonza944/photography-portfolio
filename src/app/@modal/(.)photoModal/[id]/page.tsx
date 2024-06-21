@@ -10,18 +10,18 @@ export type PhotoProps = {
 }
 
 const PhotoModal: React.FC<PhotoProps> = ({ params }) => {
-  const {response: photo} = use(getPhotoById(params.id));
+  const photo = use(getPhotoById(params.id));
 
   return (
     <Modal>
       {photo && (
         <Image
           className=" rounded-md shadow-md shadow-fontColor"
-          src={photo.urls.regular}
+          src={photo.src}
           width={photo.width}
           height={photo.height}
-          alt={photo.alt_description || "Image"}
-          style={{ width: "600px", height: "auto" }}
+          alt={photo.alt}
+          style={{ width: "900px", height: "auto" }}
           placeholder={`data:image/svg+xml;base64,${toBase64(
             shimmer(photo.width, photo.height)
           )}`}

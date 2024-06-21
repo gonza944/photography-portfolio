@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const Stories: React.FC = async () => {
-  const photos = await getNewPhotosRequest(env.STORY_FETCH_PHOTO_NUMBER);
+  const photos = await getNewPhotosRequest(env.NEXT_PUBLIC_STORY_FETCH_PHOTO_NUMBER);
 
   return <InfiniteGrid elements={photos} />;
 };

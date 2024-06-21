@@ -12,7 +12,7 @@ const InfiniteGrid: React.FC<{ elements: Photo[] }> = ({ elements }) => {
   const percentileToFetchNewData = Number.parseInt(
     (
       elements.length *
-      Number.parseFloat(env.PERCENTAGE_TO_FETCH_NEW_DATA || "0.8")
+      Number.parseFloat(env.NEXT_PUBLIC_PERCENTAGE_TO_FETCH_NEW_DATA || "0.8")
     ).toFixed(0)
   );
   const [isIntersecting, targetRef] = useIntersectionObserver<HTMLImageElement>(
@@ -28,7 +28,7 @@ const InfiniteGrid: React.FC<{ elements: Photo[] }> = ({ elements }) => {
     if (isIntersecting) {
       const fetchNewPhotos = async () => {
         const newPhotos = await getNewPhotosRequest(
-          env.STORY_FETCH_PHOTO_NUMBER,
+          env.NEXT_PUBLIC_STORY_FETCH_PHOTO_NUMBER,
           elements.length + 1
         );
 

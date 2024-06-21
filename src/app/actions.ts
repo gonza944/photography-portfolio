@@ -15,7 +15,7 @@ export type Photo = {
 export const getNewPhotosRequest = cache(
   async (numberOfPhotos: string = "30", startFrom: number = 1) => {
     try {
-      if (env.VERCEL_ENV === "development") {
+      if (env.VERCEL_ENV === "developments") {
         const unsplashClient = createApi({
           accessKey: `${env.UNSPLASH_API_KEY}`,
         });
@@ -57,14 +57,16 @@ export const getNewPhotosRequest = cache(
         let photos = [];
 
         for (let index = 0; index <= numberOfPhotosInt; index++) {
+          const photoId = startFrom + index + 1;
           photos.push({
             width: 600,
             height: 900,
             alt: "Portfolio Photo",
             src: `${
-              env.IMGIX_DOMAIN || "https://gonzaloariza-975314016.imgix.net"
-            }/Portfolio-${startFrom + index + 1}.jpg?auto=format&fit=cropw=600`,
-            id: `Portfolio-${index}`,
+              env.NEXT_PUBLIC_IMGIX_DOMAIN ||
+              "https://gonzaloariza-975314016.imgix.net"
+            }/Portfolio-${photoId}.jpg?auto=format&fit=cropw=600`,
+            id: `Portfolio-${photoId}`,
           });
         }
         return photos;
@@ -77,11 +79,34 @@ export const getNewPhotosRequest = cache(
 
 export const getPhotoById = cache(async (id: string) => {
   try {
-    const unsplashClient = createApi({
-      accessKey: `${env.UNSPLASH_API_KEY}`,
-    });
+    if (env.VERCEL_ENV === "developments") {
+      const unsplashClient = createApi({
+        accessKey: `${env.UNSPLASH_API_KEY}`,
+      });
 
-    return unsplashClient.photos.get({ photoId: id });
+      const data = await unsplashClient.photos
+        .get({ photoId: id })
+        .then((data) => data.response);
+
+      return {
+        width: data?.width || 600,
+        height: data?.height || 900,
+        alt: data?.alt_description || "",
+        src: data?.urls.regular || "",
+        id: data?.id,
+      };
+    } else {
+      return {
+        width: 1080,
+        height: 1900,
+        alt: "Portfolio Photo",
+        src: `${
+          env.NEXT_PUBLIC_IMGIX_DOMAIN ||
+          "https://gonzaloariza-975314016.imgix.net"
+        }/${id}.jpg`,
+        id: id,
+      };
+    }
   } catch (error) {
     throw new Error("failed to fetch new photos");
   }
@@ -92,7 +117,7 @@ export const getPhotoByIdServer = cache(async (id: string) => {
     const data = await getPhotoById(id);
 
     //Fix tipying
-    return data.response as unknown as Photo;
+    return data as Photo;
   } catch (error) {
     throw new Error("failed to fetch new photos");
   }
