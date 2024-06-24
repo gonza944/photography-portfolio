@@ -1,3 +1,6 @@
+"use server";
+
+import { createShuffledArray } from "@/utils/utils";
 import { env } from "process";
 import { cache } from "react";
 import { createApi } from "unsplash-js";
@@ -13,9 +16,12 @@ export type Photo = {
 };
 
 export const getNewPhotosRequest = cache(
-  async (numberOfPhotos: string = "30", startFrom: number = 1) => {
+  async (
+    numberOfPhotos: string = env.NEXT_PUBLIC_STORY_FETCH_PHOTO_NUMBER || "30",
+    startFrom: number = 1
+  ) => {
     try {
-      if (env.VERCEL_ENV === "development") {
+      if (env.NODE_ENV === "development") {
         const unsplashClient = createApi({
           accessKey: `${env.UNSPLASH_API_KEY}`,
         });
@@ -49,26 +55,20 @@ export const getNewPhotosRequest = cache(
 
         return data as Photo[];
       } else {
-        // aca tengo que armar el objeto que me devolveria imgix, seria la URL con la opcion para que sea comprimida y co un formato piola. El width, el height y el alt
-        // Crear un type, no usar mas el Random
-        // Para la URL tengo que elegir fotos random que vayan variando de a poco, una vez por mes mas o menos
-        // Como hago para saber el numero total de fotos cosa de que no me pase de ese numero
+        const now = new Date();
+        const indexsToFetch = createShuffledArray(
+          Number.parseInt(env.NEXT_PUBLIC_INFINITY_GRID_LENGTH || "82"),
+          now.getMonth()
+        );
         const numberOfPhotosInt = Number.parseInt(numberOfPhotos);
-        let photos = [];
 
-        for (let index = 0; index <= numberOfPhotosInt; index++) {
-          const photoId = startFrom + index + 1;
-          photos.push({
-            width: 600,
-            height: 900,
-            alt: "Portfolio Photo",
-            src: `${
-              env.NEXT_PUBLIC_IMGIX_DOMAIN ||
-              "https://gonzaloariza-975314016.imgix.net"
-            }/Portfolio-${photoId}.jpg?auto=format&fit=cropw=600`,
-            id: `Portfolio-${photoId}`,
-          });
-        }
+        const photos = indexsToFetch.slice(startFrom + 1, startFrom + numberOfPhotosInt + 1).map((photoId) => ({
+          width: 600,
+          height: 900,
+          alt: "Portfolio Photo",
+          src: `${env.NEXT_PUBLIC_IMGIX_DOMAIN}/Portfolio-${photoId}.jpg?auto=format&fit=cropw=600`,
+          id: `Portfolio-${photoId}`,
+        }));
         return photos;
       }
     } catch (error) {
@@ -79,7 +79,7 @@ export const getNewPhotosRequest = cache(
 
 export const getPhotoById = cache(async (id: string) => {
   try {
-    if (env.VERCEL_ENV === "development") {
+    if (env.NODE_ENV === "development") {
       const unsplashClient = createApi({
         accessKey: `${env.UNSPLASH_API_KEY}`,
       });
@@ -100,10 +100,7 @@ export const getPhotoById = cache(async (id: string) => {
         width: 1080,
         height: 1900,
         alt: "Portfolio Photo",
-        src: `${
-          env.NEXT_PUBLIC_IMGIX_DOMAIN ||
-          "https://gonzaloariza-975314016.imgix.net"
-        }/${id}.jpg`,
+        src: `${env.NEXT_PUBLIC_IMGIX_DOMAIN}/${id}.jpg`,
         id: id,
       };
     }
@@ -116,7 +113,6 @@ export const getPhotoByIdServer = cache(async (id: string) => {
   try {
     const data = await getPhotoById(id);
 
-    //Fix tipying
     return data as Photo;
   } catch (error) {
     throw new Error("failed to fetch new photos");
