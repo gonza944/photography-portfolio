@@ -1,7 +1,7 @@
 "use client";
 
 import useIntersectionObserver from "@/Hooks/useIntersectionObserver";
-import { shimmer, toBase64 } from "@/utils/loaderUtils";
+import { shimmer, toBase64 } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { env } from "process";

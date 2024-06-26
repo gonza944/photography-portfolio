@@ -1,7 +1,7 @@
 "use client";
 import { getPhotoById } from "@/app/actions";
 import { Modal } from "@/components/Modal/modal";
-import { shimmer, toBase64 } from "@/utils/loaderUtils";
+import { shimmer, toBase64 } from "@/utils/utils";
 import Image from "next/image";
 import { use } from "react";
 
